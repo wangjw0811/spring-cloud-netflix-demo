@@ -37,11 +37,11 @@ public class UserController {
         return ResponseData.failure();
     }
 
-    /*@GetMapping("/${current}/${size}")
+    @GetMapping("/{current}/{size}")
     public ResponseData<List<UserVO>> getUsers(@PathVariable(name="current") int current, @PathVariable(name="size") int size){
         List<UserVO> users = userApi.getUsers(current, size);
         return ResponseData.success(users);
-    }*/
+    }
 
     @GetMapping("/{id}")
     public ResponseData<UserVO> getUser(@PathVariable int id){

@@ -37,10 +37,10 @@ public class UserController {
         return userApi.updateUser(user);
     }
 
-   /* @GetMapping("/${current}/${size}")
+    @GetMapping("/{current}/{size}")
     public List<UserVO> getUsers(@PathVariable(name="current") int current, @PathVariable(name="size") int size){
         return userApi.getUsers(current, size);
-    }*/
+    }
 
     @GetMapping("/{id}")
     public UserVO getUser(@PathVariable(name="id") int id){

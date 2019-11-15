@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(name = "user-server")
+@FeignClient(name = "user-server", fallback = UserHystrix.class)
 public interface UserApi {
 
     @RequestMapping(path = "api/user",method = RequestMethod.POST)
@@ -25,7 +25,7 @@ public interface UserApi {
     @RequestMapping(path = "api/user/{id}",method = RequestMethod.DELETE)
     Boolean deleteUser(@PathVariable("id") int id);
 
-    @RequestMapping(path = "api/user/{current}/{size}",method = RequestMethod.DELETE)
+    @RequestMapping(path = "api/user/{current}/{size}",method = RequestMethod.GET)
     List<UserVO> getUsers(@PathVariable("current")int current, @PathVariable("size")int size);
 
 }

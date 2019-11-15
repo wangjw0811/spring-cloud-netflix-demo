@@ -66,7 +66,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         IPage<User> users = this.page(page);
         List<User> records = users.getRecords();
         List<UserVO> vos = new ArrayList<>();
-        BeanUtils.copyProperties(records, vos);
+        records.forEach(record->{
+            UserVO vo = new UserVO();
+            BeanUtils.copyProperties(record, vo);
+            vos.add(vo);
+        });
         return vos;
     }
 }
