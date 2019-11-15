@@ -11,7 +11,7 @@ import utils.ResponseData;
 
 import java.util.List;
 
-@RequestMapping("/web")
+@RequestMapping("/web/user")
 @RestController
 public class UserController {
 
@@ -19,7 +19,7 @@ public class UserController {
     private UserApi userApi;
 
 
-    @PostMapping("/user")
+    @PostMapping
     public ResponseData createUser(@RequestBody PostUser user){
         Integer userId = userApi.createUser(user);
         if(userId != null){
@@ -43,13 +43,13 @@ public class UserController {
         return ResponseData.success(users);
     }*/
 
-    @GetMapping("user/{id}")
+    @GetMapping("/{id}")
     public ResponseData<UserVO> getUser(@PathVariable int id){
         UserVO user = userApi.getUser(id);
         return ResponseData.success(user);
     }
 
-    @DeleteMapping("user/{id}")
+    @DeleteMapping("/{id}")
     public ResponseData<String> deleteUser(@PathVariable int id){
         Boolean ok = userApi.deleteUser(id);
         if(ok){
