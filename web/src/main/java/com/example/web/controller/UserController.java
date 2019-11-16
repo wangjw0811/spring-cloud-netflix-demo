@@ -45,6 +45,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseData<UserVO> getUser(@PathVariable int id){
+        System.out.println("获取用户信息");
         UserVO user = userApi.getUser(id);
         return ResponseData.success(user);
     }
