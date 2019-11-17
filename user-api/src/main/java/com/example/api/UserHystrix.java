@@ -33,7 +33,7 @@ public class UserHystrix implements UserApi {
     @Override
     public Boolean deleteUser(int id) {
         log.error("服务异常，删除用户信息失败");
-        return null;
+        return false;
     }
 
     @Override

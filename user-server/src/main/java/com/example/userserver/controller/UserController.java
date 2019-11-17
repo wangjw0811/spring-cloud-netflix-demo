@@ -29,26 +29,51 @@ public class UserController {
 
     @PostMapping
     public Integer createUser(@Validated @RequestBody PostUser user){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return userApi.createUser(user);
     }
 
     @PutMapping
     public Integer updateUser(@Validated @RequestBody PutUser user){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return userApi.updateUser(user);
     }
 
     @GetMapping("/{current}/{size}")
     public List<UserVO> getUsers(@PathVariable(name="current") int current, @PathVariable(name="size") int size){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return userApi.getUsers(current, size);
     }
 
     @GetMapping("/{id}")
     public UserVO getUser(@PathVariable(name="id") int id){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return userApi.getUser(id);
     }
 
     @DeleteMapping("/{id}")
     public boolean deleteUser(@PathVariable(name="id") int id){
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return userApi.deleteUser(id);
     }
 
