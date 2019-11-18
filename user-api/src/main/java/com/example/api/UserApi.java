@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(name = "user-server", fallback = UserHystrix.class)
+@FeignClient(name = "user-server", fallbackFactory = UserFallBackFactory.class, primary = false)
 public interface UserApi {
 
     @RequestMapping(path = "api/user",method = RequestMethod.POST)

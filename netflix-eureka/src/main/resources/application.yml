@@ -6,5 +6,8 @@ eureka:
     fetch-registry: false # 此客户端是否获取eureka服务器注册表上的注册信息，默认为true
     service-url:
         defaultZone: http://localhost:8761/eureka/
-    healthcheck:
-      enabled: true
+#    healthcheck:
+#      enabled: true
+  server:
+    enable-self-preservation: false # 关闭自我保护
+    eviction-interval-timer-in-ms: 1000 #清理间隔

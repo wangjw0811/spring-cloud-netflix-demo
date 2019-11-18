@@ -3,34 +3,39 @@ server:
 spring:
   application:
     name: web
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false # Spring Cloud Netflix Ribbon is now in maintenance mode,using Spring Cloud LoadBalancer instead
+      retry:
+        enabled: true
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
-feign:
-  hystrix:
-    enabled: true # 启用断路器
-#  httpclient:
-#    connection-timeout: 2000
-#    connection-timer-repeat: 3000
+# 开启hystrix监控
 management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream # 开启hystrix监控
-#hystrix的超时时间
+        include: hystrix.stream
+# 启用断路器
+feign:
+  hystrix:
+    enabled: true
+###配置请求超时时间
 hystrix:
-    command:
-        default:
-            execution:
-              timeout:
-                enabled: true
-              isolation:
-                    thread:
-                        timeoutInMilliseconds: 1000
-#ribbon的超时时间
+  command:
+    default:
+      execution:
+        timeout:
+           enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000
 ribbon:
-  ReadTimeout: 500
-  ConnectTimeout: 500
-
-
+  MaxAutoRetries: 1 #同一台实例最大重试次数,不包括首次调用
+  MaxAutoRetriesNextServer: 1 #重试负载均衡其他的实例最大重试次数,不包括首次调用
+  OkToRetryOnAllOperations: false #是否所有操作都重试
+  ConnectTimeout: 800
+  ReadTimeout: 800
