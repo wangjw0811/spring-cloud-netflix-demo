@@ -6,9 +6,9 @@ spring:
   cloud:
     loadbalancer:
       ribbon:
-        enabled: false # Spring Cloud Netflix Ribbon is now in maintenance mode,using Spring Cloud LoadBalancer instead
-      retry:
-        enabled: true
+        enabled: true # Spring Cloud Netflix Ribbon is now in maintenance mode,using Spring Cloud LoadBalancer instead
+#      retry:
+#        enabled: true
 eureka:
   client:
     service-url:
@@ -29,13 +29,13 @@ hystrix:
     default:
       execution:
         timeout:
-           enabled: true
+          enabled: true #执行是否启用超时，默认启用true
         isolation:
           thread:
-            timeoutInMilliseconds: 2000
+            timeoutInMilliseconds: 6000
 ribbon:
-  MaxAutoRetries: 1 #同一台实例最大重试次数,不包括首次调用
-  MaxAutoRetriesNextServer: 1 #重试负载均衡其他的实例最大重试次数,不包括首次调用
+  ReadTimeout: 2000 #请求处理的超时时间
+  ConnectTimeout: 800 #请求连接的超时时间
+  MaxAutoRetries: 0 #同一台实例最大重试次数,不包括首次调用
+  MaxAutoRetriesNextServer: 0 #重试负载均衡其他的实例最大重试次数,不包括首次调用
   OkToRetryOnAllOperations: false #是否所有操作都重试
-  ConnectTimeout: 800
-  ReadTimeout: 800
