@@ -31,6 +31,7 @@
         <module>common-base</module>
         <module>user-api</module>
         <module>web</module>
+        <module>order-api</module>
     </modules>
 
     <dependencyManagement>
@@ -97,10 +98,14 @@
                 <artifactId>common-base</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.example</groupId>
                 <artifactId>user-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>order-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
