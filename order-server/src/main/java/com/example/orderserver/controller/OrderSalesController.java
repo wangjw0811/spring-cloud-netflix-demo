@@ -2,14 +2,11 @@ package com.example.orderserver.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.api.vo.SalesOrderDetailVO;
+import com.example.api.dto.PostSalesOrder;
 import com.example.api.vo.SalesOrderVO;
-import com.example.orderserver.service.IOrderSalesService;
+import com.example.orderserver.service.impl.OrderSalesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import utils.ResponseData;
 
 import java.util.List;
@@ -27,13 +24,36 @@ import java.util.List;
 public class OrderSalesController {
     
     @Autowired
-    private IOrderSalesService orderSalesService;
+    private OrderSalesServiceImpl orderSalesService;
+
+    @PostMapping
+    public ResponseData createSalesOrder(@RequestBody PostSalesOrder salesOrder){
+        Integer id = orderSalesService.createSalesOrder(salesOrder);
+        if(id != null){
+            return ResponseData.success(id);
+        }
+        return ResponseData.failure();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseData<SalesOrderVO> getSalesOrder(@PathVariable int id){
+        SalesOrderVO vo = orderSalesService.getSalesOrderWithDetails(id);
+        return ResponseData.success(vo);
+    }   
     
     @GetMapping("/{current}/{size}")
-    public ResponseData<List<SalesOrderDetailVO>> getSalesOrders(@PathVariable int current, @PathVariable int size){
-        Page<SalesOrderVO> salesOrder = orderSalesService.getSalesOrder(current, size);
-        List<SalesOrderVO> records = salesOrder.getRecords();
-        return ResponseData.success(records);
+    public ResponseData<Page<SalesOrderVO>> getSalesOrders(@PathVariable int current, @PathVariable int size){
+        List<SalesOrderVO> vos = orderSalesService.getSalesOrders(current, size);
+        return ResponseData.success(vos);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseData deleteSalesOrder(@PathVariable int id){
+        boolean ok = orderSalesService.deleteSalesOrder(id);
+        if(ok){
+            return ResponseData.success();
+        }
+        return ResponseData.failure();
     }
 
 }

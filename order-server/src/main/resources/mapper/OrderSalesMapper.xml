@@ -24,7 +24,7 @@
         </collection>
     </resultMap>
 
-    <select id="getSalesOrder" resultMap="mainResult">
+    <select id="getSalesOrdersWithDetails" resultMap="mainResult">
          select
             m.id as m_id,
             m.order_no,
@@ -45,6 +45,30 @@
                 i.subtotal
          from order_sales m
          left outer join order_sales_detail i on m.id=i.order_id
+         where m.is_deleted = 0
+    </select>
+    <select id="getSalesOrderWithDetails" parameterType="int" resultMap="mainResult">
+        select
+            m.id as m_id,
+            m.order_no,
+            m.create_date,
+            m.modified_date,
+            m.order_status,
+            m.user_id,
+            m.order_amount,
+            m.order_quantity,
+                i.id as i_id,
+                i.order_id,
+                i.product_id,
+                i.product_code,
+                i.product_name,
+                i.product_model,
+                i.product_price,
+                i.product_quantity,
+                i.subtotal
+         from order_sales m
+         left outer join order_sales_detail i on m.id=i.order_id
+         where m.is_deleted = 0 and m.id = #{id}
     </select>
 
 </mapper>

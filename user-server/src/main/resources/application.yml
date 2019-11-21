@@ -34,8 +34,12 @@ eureka:
     healthcheck:
       enabled: true
   instance:
+    instance-id: ${spring.application.name}:${server.port}
     lease-renewal-interval-in-seconds: 1
     lease-expiration-duration-in-seconds: 1
+    status-page-url-path: /actuator/health
+    app-group-name: demo
+    appname: user-server
 mybatis-plus:
   global-config:
     db-config:

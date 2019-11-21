@@ -16,7 +16,7 @@ public interface SalesOrderApi {
 
     Integer updateSalesOrder(PutSalesOrder salesOrder);
 
-    SalesOrderVO getSalesOrders(int id);
+    SalesOrderVO getSalesOrder(int id);
 
     List<SalesOrderVO> getSalesOrders(int current, int size);
 

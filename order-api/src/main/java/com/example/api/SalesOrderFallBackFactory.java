@@ -34,7 +34,7 @@ public class SalesOrderFallBackFactory implements FallbackFactory<SalesOrderApi>
             }
 
             @Override
-            public SalesOrderVO getSalesOrders(int id) {
+            public SalesOrderVO getSalesOrder(int id) {
                 log.error("fallback; reason was: " + throwable.getMessage());
                 return null;
             }

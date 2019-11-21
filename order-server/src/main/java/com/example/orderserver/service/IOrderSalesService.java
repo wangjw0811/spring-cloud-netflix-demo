@@ -15,6 +15,8 @@ import com.example.orderserver.entity.OrderSales;
  */
 public interface IOrderSalesService extends IService<OrderSales> {
 
-    Page<SalesOrderVO> getSalesOrder(int current, int size);
+    Page<SalesOrderVO> getSalesOrdersWithDetails(int current, int size);
+
+    SalesOrderVO getSalesOrderWithDetails(int id);
 
 }

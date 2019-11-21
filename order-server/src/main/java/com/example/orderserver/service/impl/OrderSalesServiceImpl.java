@@ -81,8 +81,11 @@ public class OrderSalesServiceImpl extends ServiceImpl<OrderSalesMapper, OrderSa
     }
 
     @Override
-    public SalesOrderVO getSalesOrders(int id) {
+    public SalesOrderVO getSalesOrder(int id) {
         OrderSales orderSales = this.getById(id);
+        if(orderSales == null){
+            return null;
+        }
         SalesOrderVO vo = new SalesOrderVO();
         BeanUtils.copyProperties(vo,orderSales);
         return vo;
@@ -90,34 +93,19 @@ public class OrderSalesServiceImpl extends ServiceImpl<OrderSalesMapper, OrderSa
 
     @Override
     public List<SalesOrderVO> getSalesOrders(int current, int size) {
-
-//        IPage<OrderSales> page = this.page(new Page<>(current, size));
-//        List<OrderSales> records = page.getRecords();
-//        List<SalesOrderVO> vos = new ArrayList<>();
-//        records.forEach(record->{
-//            SalesOrderVO vo = new SalesOrderVO();
-//            BeanUtils.copyProperties(vo,record);
-//            vos.add(vo);
-//            Integer id = record.getId();
-//            // 根据id查询明细
-//            OrderSalesDetail detail = new OrderSalesDetail();
-//            detail.setOrderId(id);
-//            QueryWrapper wrapper = new QueryWrapper();
-//            wrapper.setEntity(detail);
-//            OrderSalesDetail orderSalesDetail = orderSalesDetailService.query(wrapper);
-//
-//
-//        });
-//        salesOrderVO.set
-        return null;
+        Page<SalesOrderVO> salesOrder = this.getSalesOrdersWithDetails(current, size);
+        return salesOrder.getRecords();
     }
 
     @Override
-    public Page<SalesOrderVO> getSalesOrder(int current, int size) {
+    public Page<SalesOrderVO> getSalesOrdersWithDetails(int current, int size) {
         Page page = new Page(current,size);
-        List<SalesOrderVO> vos = orderSalesMapper.getSalesOrder(page);
-        log.info(vos.toString());
-        page.setRecords(vos);
-        return page;
+        Page<SalesOrderVO> vos = orderSalesMapper.getSalesOrdersWithDetails(page);
+        return vos;
+    }
+
+    @Override
+    public SalesOrderVO getSalesOrderWithDetails(int id) {
+        return orderSalesMapper.getSalesOrderWithDetails(id);
     }
 }

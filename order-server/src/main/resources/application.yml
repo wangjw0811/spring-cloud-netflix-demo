@@ -34,8 +34,11 @@ eureka:
     healthcheck:
       enabled: true
   instance:
+    instance-id: ${spring.application.name}:${server.port}
     lease-renewal-interval-in-seconds: 1
     lease-expiration-duration-in-seconds: 1
+    app-group-name: demon
+    appname: order-server
 mybatis-plus:
   global-config:
     db-config:
