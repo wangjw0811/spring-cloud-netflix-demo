@@ -13,19 +13,19 @@ import java.util.List;
 @FeignClient(name = "user-server", fallbackFactory = UserFallBackFactory.class, primary = false)
 public interface UserApi {
 
-    @RequestMapping(path = "api/user",method = RequestMethod.POST)
+    @RequestMapping(path = "/api/user",method = RequestMethod.POST)
     Integer createUser(PostUser user);
 
-    @RequestMapping(path = "api/user/{id}",method = RequestMethod.GET)
+    @RequestMapping(path = "/api/user/{id}",method = RequestMethod.GET)
     UserVO getUser(@PathVariable("id") int id);
 
-    @RequestMapping(path = "api/user",method = RequestMethod.PUT)
+    @RequestMapping(path = "/api/user",method = RequestMethod.PUT)
     Integer updateUser(PutUser user);
 
-    @RequestMapping(path = "api/user/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(path = "/api/user/{id}",method = RequestMethod.DELETE)
     Boolean deleteUser(@PathVariable("id") int id);
 
-    @RequestMapping(path = "api/user/{current}/{size}",method = RequestMethod.GET)
+    @RequestMapping(path = "/api/user/{current}/{size}",method = RequestMethod.GET)
     List<UserVO> getUsers(@PathVariable("current")int current, @PathVariable("size")int size);
 
 }

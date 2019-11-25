@@ -1,0 +1,16 @@
+server:
+  port: 7070
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+    register-with-eureka: false
+zuul:
+  routes:
+    user-server: /api/user/**
+    order-server: /api/order-sales/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

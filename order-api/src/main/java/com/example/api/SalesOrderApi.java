@@ -11,19 +11,19 @@ import java.util.List;
 @FeignClient(value = "order-server", fallbackFactory = SalesOrderFallBackFactory.class, primary = false)
 public interface SalesOrderApi {
 
-    @PostMapping(value = "/order-sales")
+    @PostMapping(value = "/api/order-sales")
     Integer createSalesOrder(PostSalesOrder salesOrder);
 
-    @DeleteMapping(value = "/order-sales/{id}")
+    @DeleteMapping(value = "/api/order-sales/{id}")
     boolean deleteSalesOrder(@PathVariable("id") int id);
 
-    @PutMapping(value = "/order-sales")
+    @PutMapping(value = "/api/order-sales")
     Integer updateSalesOrder(PutSalesOrder salesOrder);
 
-    @GetMapping(value = "/order-sales/{id}")
+    @GetMapping(value = "/api/order-sales/{id}")
     SalesOrderVO getSalesOrder(@PathVariable("id") int id);
 
-    @GetMapping(value = "/order-sales/{current}/{size}")
+    @GetMapping(value = "/api/order-sales/{current}/{size}")
     List<SalesOrderVO> getSalesOrders(@PathVariable("current") int current, @PathVariable("size") int size);
 
 }

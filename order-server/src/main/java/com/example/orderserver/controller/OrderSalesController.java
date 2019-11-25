@@ -18,7 +18,7 @@ import java.util.List;
  * @since 2019-11-19
  */
 @RestController
-@RequestMapping("/order-sales")
+@RequestMapping("/api/order-sales")
 public class OrderSalesController {
     
     @Autowired
