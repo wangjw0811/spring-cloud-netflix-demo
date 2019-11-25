@@ -87,7 +87,7 @@ public class OrderSalesServiceImpl extends ServiceImpl<OrderSalesMapper, OrderSa
             return null;
         }
         SalesOrderVO vo = new SalesOrderVO();
-        BeanUtils.copyProperties(vo,orderSales);
+        BeanUtils.copyProperties(orderSales,vo);
         return vo;
     }
 
@@ -106,6 +106,8 @@ public class OrderSalesServiceImpl extends ServiceImpl<OrderSalesMapper, OrderSa
 
     @Override
     public SalesOrderVO getSalesOrderWithDetails(int id) {
-        return orderSalesMapper.getSalesOrderWithDetails(id);
+        SalesOrderVO salesOrderWithDetails = orderSalesMapper.getSalesOrderWithDetails(id);
+
+        return salesOrderWithDetails;
     }
 }

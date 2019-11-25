@@ -1,13 +1,11 @@
 package com.example.orderserver.controller;
 
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.api.dto.PostSalesOrder;
 import com.example.api.vo.SalesOrderVO;
 import com.example.orderserver.service.impl.OrderSalesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import utils.ResponseData;
 
 import java.util.List;
 
@@ -27,33 +25,26 @@ public class OrderSalesController {
     private OrderSalesServiceImpl orderSalesService;
 
     @PostMapping
-    public ResponseData createSalesOrder(@RequestBody PostSalesOrder salesOrder){
+    public Integer createSalesOrder(@RequestBody PostSalesOrder salesOrder){
         Integer id = orderSalesService.createSalesOrder(salesOrder);
-        if(id != null){
-            return ResponseData.success(id);
-        }
-        return ResponseData.failure();
+        return id;
     }
 
     @GetMapping("/{id}")
-    public ResponseData<SalesOrderVO> getSalesOrder(@PathVariable int id){
+    public SalesOrderVO getSalesOrder(@PathVariable("id") int id){
         SalesOrderVO vo = orderSalesService.getSalesOrderWithDetails(id);
-        return ResponseData.success(vo);
+        return vo;
     }   
     
     @GetMapping("/{current}/{size}")
-    public ResponseData<Page<SalesOrderVO>> getSalesOrders(@PathVariable int current, @PathVariable int size){
+    public List<SalesOrderVO> getSalesOrders(@PathVariable("current") int current, @PathVariable("size") int size){
         List<SalesOrderVO> vos = orderSalesService.getSalesOrders(current, size);
-        return ResponseData.success(vos);
+        return vos;
     }
 
     @DeleteMapping("/{id}")
-    public ResponseData deleteSalesOrder(@PathVariable int id){
-        boolean ok = orderSalesService.deleteSalesOrder(id);
-        if(ok){
-            return ResponseData.success();
-        }
-        return ResponseData.failure();
+    public boolean deleteSalesOrder(@PathVariable("id") int id){
+        return orderSalesService.deleteSalesOrder(id);
     }
 
 }

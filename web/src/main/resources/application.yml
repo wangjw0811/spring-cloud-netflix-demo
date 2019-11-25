@@ -7,23 +7,16 @@ spring:
     loadbalancer:
       ribbon:
         enabled: true # Spring Cloud Netflix Ribbon is now in maintenance mode,using Spring Cloud LoadBalancer instead
-#      retry:
-#        enabled: true
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
-# 开启hystrix监控
+# 开启监控
 management:
   endpoints:
     web:
       exposure:
         include: hystrix.stream
-turbine:
-  aggregator:
-    cluster-config: DEMO
-  app-config: user-server,order-server
-  cluster-name-expression: metadata['demo']
 # 启用断路器
 feign:
   hystrix:

@@ -26,6 +26,8 @@
 
     <modules>
         <module>netflix-eureka</module>
+        <module>hystrix-dashboard</module>
+        <module>turbine</module>
         <module>user-server</module>
         <module>order-server</module>
         <module>common-base</module>
