@@ -1,3 +1,4 @@
+CREATE DATABASE `order` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE TABLE `order_sales` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_no` varchar(16) NOT NULL COMMENT '订单号',
